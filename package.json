@@ -22,7 +22,10 @@
     "s": "sequelize-cli",
     "dev": "nodemon",
     "start": "node server/index.js",
-    "test": "mocha"
+    "test": "mocha",
+    "cleanSlate": "npx sequelize db:seed:undo:all && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all"
+
+
   },
   "keywords": [],
   "author": "App Academy Academics <academics@appacademy.io>",

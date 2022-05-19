@@ -1,17 +1,19 @@
 'use strict';
+
+// const { DataTypes } = require("sequelize/types");
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('MeasurementUnits', {
+    return queryInterface.createTable('RECIPEs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        allowNull: false,
-        unique: true,
-        type: Sequelize.STRING (20)
+      title: {
+        type: Sequelize.STRING(200),
+        allowNull:false
       },
       createdAt: {
         allowNull: false,
@@ -24,6 +26,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('MeasurementUnits');
+    return queryInterface.dropTable('RECIPEs');
   }
 };
