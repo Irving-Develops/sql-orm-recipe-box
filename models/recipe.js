@@ -4,12 +4,22 @@ module.exports = (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       validate: {
-        notEmpty:true,
+        notEmpty: true,
       },
     },
   }, {});
-  Recipe.associate = function(models) {
-    Recipe.hasMany(models.Instruction, { foreignKey: 'recipeId' });
+  Recipe.associate = function (models) {
+    Recipe.hasMany(models.Instruction, {
+      foreignKey: 'recipeId',
+      onDelete: 'CASCADE',
+      hooks: true
+    });
+    Recipe.hasMany(models.Ingredient, {
+      foreignKey: 'recipeId',
+      onDelete: 'CASCADE',
+      hooks: true
+    });
+
   };
   return Recipe;
 };

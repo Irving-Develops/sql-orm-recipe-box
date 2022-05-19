@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Instruction.associate = function(models) {
     Instruction.belongsTo(models.Recipe, { foreignKey: 'recipeId' });
+    Instruction.hasMany(models.Ingredient, {foreignKey: 'ingredientId'});
   };
   return Instruction;
 };

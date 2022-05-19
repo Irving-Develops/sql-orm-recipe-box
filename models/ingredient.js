@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     measurementUnitId: DataTypes.INTEGER,
     foodStuff: {
       type:DataTypes.STRING,
-      valide: {
+      validate: {
         notEmpty:true
       },
     },
@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Ingredient.associate = function(models) {
     // associations can be defined here
+    Ingredient.belongsTo(models.Recipe, { foreignKey: 'recipeId'})
+    Ingredient.hasOne(models.MeasurementUnitId, { foreignKey: 'measurementUnitId'})
   };
   return Ingredient;
 };

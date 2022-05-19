@@ -34,7 +34,13 @@ async function getTenNewestRecipes() {
   // });
   //
   // Docs: https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll
+  const recipes = await Recipe.findAll({
+    order: [['createdAt', 'DESC']],
+    limit: 10
+  })
+  return recipes;
 }
+// getTenNewestRecipes();
 
 async function getRecipeById(id) {
   // Use the findByPk method of the Recipe object to return the recipe. Use
@@ -71,6 +77,17 @@ async function getRecipeById(id) {
   // Here are links to the wholly-inadequate docs for this.
   // Docs: https://sequelize.org/v5/manual/models-usage.html#eager-loading
   //       https://sequelize.org/v5/manual/models-usage.html#nested-eager-loading
+
+  const recipe = Recipe.findByPk(id, {
+          include: [
+            Instruction,
+            {
+              model: Ingredient,
+              include: [MeasurementUnit]
+            }
+          ]
+        });
+  return recipe;
 }
 
 async function deleteRecipe(id) {
@@ -79,6 +96,7 @@ async function deleteRecipe(id) {
   // saw in the video.
   //
   // Docs: https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-destroy
+
 }
 
 async function createNewRecipe(title) {
@@ -86,6 +104,7 @@ async function createNewRecipe(title) {
   // return it.
   //
   // Docs: https://sequelize.org/v5/manual/instances.html#creating-persistent-instances
+
 }
 
 async function searchRecipes(term) {
@@ -93,6 +112,7 @@ async function searchRecipes(term) {
   // given term in its title
   //
   // Docs: https://sequelize.org/v5/manual/querying.html
+
 }
 
 
